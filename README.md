@@ -4,7 +4,10 @@ Eine eigenständige, moderne Single-Page-App (SPA) zum Erlernen des japanischen 
 
 ## 🚀 Live Demo
 
-Die Anwendung ist live auf Netlify verfügbar!
+Die Anwendung ist auf verschiedenen Plattformen erreichbar:
+
+* **Netlify (Haupt-Deployment):** [https://katakana-vhs.netlify.app/](https://katakana-vhs.netlify.app/)
+* **GitHub Pages:** [https://holgergp.github.io/katakana-vhs/](https://holgergp.github.io/katakana-vhs/)
 
 ---
 
