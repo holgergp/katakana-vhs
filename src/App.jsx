@@ -471,19 +471,25 @@ function Overview({ selectedLesson, setSelectedLesson }) {
           className={`filter-pill ${selectedLesson === "all" ? "active" : ""}`}
           onClick={() => setSelectedLesson("all")}
         >
-          Alle Zeichen (Gojuon + Dakuten)
+          Alle Zeichen
         </button>
         <button
           className={`filter-pill ${selectedLesson === "1" ? "active" : ""}`}
           onClick={() => setSelectedLesson("1")}
         >
-          Lektion 1 (Grundzeichen)
+          Lektion 1 (ア – ソ)
         </button>
         <button
           className={`filter-pill ${selectedLesson === "2" ? "active" : ""}`}
           onClick={() => setSelectedLesson("2")}
         >
-          Lektion 2 (Dakuten / Handakuten)
+          Lektion 2 (タ – ン)
+        </button>
+        <button
+          className={`filter-pill ${selectedLesson === "3" ? "active" : ""}`}
+          onClick={() => setSelectedLesson("3")}
+        >
+          Lektion 3 (Dakuten / Handakuten)
         </button>
       </div>
 
