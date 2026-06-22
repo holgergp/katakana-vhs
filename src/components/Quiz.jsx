@@ -136,13 +136,19 @@ export default function Quiz({ mode, wrongCounts, onRegisterMiss }) {
           className={`filter-pill ${selectedLesson === "2" ? "active" : ""}`}
           onClick={() => handleLessonChange("2")}
         >
-          Lektion 2 (タ – ン)
+          Lektion 2 (タ – ホ)
         </button>
         <button
           className={`filter-pill ${selectedLesson === "3" ? "active" : ""}`}
           onClick={() => handleLessonChange("3")}
         >
-          Lektion 3 (Dakuten)
+          Lektion 3 (マ – ン)
+        </button>
+        <button
+          className={`filter-pill ${selectedLesson === "4" ? "active" : ""}`}
+          onClick={() => handleLessonChange("4")}
+        >
+          Lektion 4 (Dakuten)
         </button>
       </div>
 

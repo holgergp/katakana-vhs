@@ -483,13 +483,19 @@ function Overview({ selectedLesson, setSelectedLesson }) {
           className={`filter-pill ${selectedLesson === "2" ? "active" : ""}`}
           onClick={() => setSelectedLesson("2")}
         >
-          Lektion 2 (タ – ン)
+          Lektion 2 (タ – ホ)
         </button>
         <button
           className={`filter-pill ${selectedLesson === "3" ? "active" : ""}`}
           onClick={() => setSelectedLesson("3")}
         >
-          Lektion 3 (Dakuten / Handakuten)
+          Lektion 3 (マ – ン)
+        </button>
+        <button
+          className={`filter-pill ${selectedLesson === "4" ? "active" : ""}`}
+          onClick={() => setSelectedLesson("4")}
+        >
+          Lektion 4 (Dakuten / Handakuten)
         </button>
       </div>
 
