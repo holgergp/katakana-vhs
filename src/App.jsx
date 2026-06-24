@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { KATAKANA_DATA, WORD_DATA, GROUP_LABELS } from "./data.js";
 import Quiz from "./components/Quiz.jsx";
 import WordQuiz from "./components/WordQuiz.jsx";
@@ -19,6 +19,18 @@ const styles = `
     --font-sans: 'Noto Sans JP', sans-serif;
   }
 
+  [data-theme="light"] {
+    --bg-color: #faf8f5;
+    --text-color: #1c1a17;
+    --text-muted: #706b63;
+    --gold: #966b0a;
+    --gold-light: #b58410;
+    --card-bg: #ffffff;
+    --card-hover: #f5f2eb;
+    --border: #e3ded5;
+    --button-bg: #eae4da;
+  }
+
   body {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -27,6 +39,7 @@ const styles = `
     padding: 0;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .app-container {
@@ -34,6 +47,43 @@ const styles = `
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
+    position: relative;
+  }
+
+  /* Theme Toggle Button */
+  .theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: var(--button-bg);
+    border: 1px solid var(--border);
+    color: var(--text-color);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    font-size: 1.25rem;
+    padding: 0;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--gold);
+    background-color: var(--card-hover);
+    transform: scale(1.08);
+  }
+
+  @media (max-width: 600px) {
+    .theme-toggle {
+      top: 15px;
+      right: 15px;
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+    }
   }
 
   /* Header Styles */
@@ -548,9 +598,40 @@ function Overview({ selectedLesson, setSelectedLesson }) {
   );
 }
 
+const getInitialTheme = () => {
+  const savedTheme = localStorage.getItem("katakana-theme");
+  if (savedTheme) {
+    return savedTheme;
+  }
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: light)").matches
+  ) {
+    return "light";
+  }
+  return "dark";
+};
+
 export default function App() {
   const [tab, setTab] = useState("overview");
   const [selectedLesson, setSelectedLesson] = useState("all");
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("katakana-theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
+    const handleChange = (e) => {
+      if (!localStorage.getItem("katakana-theme")) {
+        setTheme(e.matches ? "light" : "dark");
+      }
+    };
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   // Shared state: tracks how often a character or word was missed/answered incorrectly
   const [wrongCounts, setWrongCounts] = useState({});
@@ -576,6 +657,19 @@ export default function App() {
     <>
       <style>{styles}</style>
       <div className="app-container">
+        <button
+          className="theme-toggle"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          aria-label="Theme wechseln"
+          title={
+            theme === "dark"
+              ? "Hellen Modus aktivieren"
+              : "Dunklen Modus aktivieren"
+          }
+        >
+          {theme === "dark" ? "☀️" : "🌙"}
+        </button>
+
         <div className="header">
           <div className="header-eyebrow">みんなの日本語 · VHS Düsseldorf</div>
           <h1 className="header-title">Katakana</h1>
