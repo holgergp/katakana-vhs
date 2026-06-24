@@ -22,7 +22,7 @@ export default function Quiz({ mode, wrongCounts, onRegisterMiss }) {
   const generateQuestion = (lessonFilter) => {
     const filteredPool = KATAKANA_DATA.filter((item) => {
       if (lessonFilter === "all") return true;
-      return item.lesson === Number(lessonFilter);
+      return item.lesson <= Number(lessonFilter);
     });
 
     if (filteredPool.length === 0) {
@@ -124,7 +124,7 @@ export default function Quiz({ mode, wrongCounts, onRegisterMiss }) {
           className={`filter-pill ${selectedLesson === "all" ? "active" : ""}`}
           onClick={() => handleLessonChange("all")}
         >
-          Alle
+          Alle Lektionen
         </button>
         <button
           className={`filter-pill ${selectedLesson === "1" ? "active" : ""}`}
@@ -136,19 +136,19 @@ export default function Quiz({ mode, wrongCounts, onRegisterMiss }) {
           className={`filter-pill ${selectedLesson === "2" ? "active" : ""}`}
           onClick={() => handleLessonChange("2")}
         >
-          Lektion 2 (タ – ホ)
+          Lektion 1 – 2 (bis ホ)
         </button>
         <button
           className={`filter-pill ${selectedLesson === "3" ? "active" : ""}`}
           onClick={() => handleLessonChange("3")}
         >
-          Lektion 3 (マ – ン)
+          Lektion 1 – 3 (bis ン)
         </button>
         <button
           className={`filter-pill ${selectedLesson === "4" ? "active" : ""}`}
           onClick={() => handleLessonChange("4")}
         >
-          Lektion 4 (Dakuten)
+          Lektion 1 – 4 (inkl. Dakuten)
         </button>
       </div>
 
