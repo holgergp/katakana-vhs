@@ -634,7 +634,18 @@ export default function App() {
   }, []);
 
   // Shared state: tracks how often a character or word was missed/answered incorrectly
-  const [wrongCounts, setWrongCounts] = useState({});
+  const [wrongCounts, setWrongCounts] = useState(() => {
+    try {
+      const saved = localStorage.getItem("katakana-wrong-counts");
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("katakana-wrong-counts", JSON.stringify(wrongCounts));
+  }, [wrongCounts]);
 
   const registerMiss = (key) => {
     setWrongCounts((prev) => ({
